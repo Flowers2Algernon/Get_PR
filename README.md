@@ -1,4 +1,4 @@
-# 🌍 Global Run & Visa DIY Guide (全球主流身份/工签/移民 DIY 实战手册)
+# 🌍 Get_PR：全球主流身份、工签与技术移民 DIY 实战手册
 
 <p align="center">
   <img src="https://img.shields.io/badge/Version-2026.10-blue?style=for-the-badge" alt="Version" />
@@ -46,7 +46,7 @@ GitHub 上已有不少“润学”仓库，但大多数停留在几年前的零�
 
 ## 📂 仓库目录导航
 
-### 1. 各国/地区深度 DIY 指南（含打分表、费用明细、续签避坑与 X 推文总结）
+### 1. 各国/地区深度 DIY 指南（含官方算分表、费用明细与续签避坑）
 * 🇦🇺 **[01-澳大利亚：189/190/491 技术移民、三宝留学与 482 雇主担保全解](./docs/01-australia/README.md)**
 * 🇯🇵 **[02-日本：高度人才 1 年永住算分、技人国直聘、J-Find 与语校避坑指南](./docs/02-japan/README.md)**
 * 🇺🇸 **[03-美国：EB-2 NIW / EB-1A 独立 DIY、L-1 内部转岗与 F-1/H-1B 破局](./docs/03-usa/README.md)**
@@ -55,7 +55,6 @@ GitHub 上已有不少“润学”仓库，但大多数停留在几年前的零�
 
 ### 2. 实用 DIY 模板与算账工具
 * 📋 **[通用 DIY 申请材料总表与中英日文书 Checklist](./templates/diy-checklist-and-sop.md)**
-* 📈 **[附：X (Twitter) 全球移民/签证赛道内容创作与流量分红指南](./x-growth/x-monetization-playbook.md)**
 
 ---
 
