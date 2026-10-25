@@ -4,7 +4,6 @@
   <img src="https://img.shields.io/badge/Version-2026.10-blue?style=for-the-badge" alt="Version" />
   <img src="https://img.shields.io/badge/Regions-AU%20%7C%20JP%20%7C%20US%20%7C%20HK%20%7C%20EU-success?style=for-the-badge" alt="Regions" />
   <img src="https://img.shields.io/badge/DIY_First-Anti_Agency_Tax-orange?style=for-the-badge" alt="DIY First" />
-  <a href="https://visaduo.com"><img src="https://img.shields.io/badge/Powered_by-VisaDuo-7C3AED?style=for-the-badge" alt="VisaDuo" /></a>
 </p>
 
 > **拒绝数万元黑心中介“信息差税”，用工程化思维拆解全球主流国家/地区合法签证、工作与永居（PR）路径。**  
@@ -19,8 +18,7 @@ GitHub 上已有不少“润学”仓库，但大多数停留在几年前的零�
 本仓库坚持三个原则：
 1. **数据与官信源驱动（Source of Truth）**：所有门槛、打分表、薪资线均对齐各国移民局最新官方条款。
 2. **全链路闭环（Entry to PR）**：拒绝“只管下签不管死活”的中介话术，重点剖析**续签卡点**与**转永居确定性**。
-3. **100% DIY 友好**：绝大部分技术移民、人才引进、留学工签完全可以独立 DIY。
-   * 🛠️ **配套自动化工具**：如果你不想手动比对几十页官方 Checklist、算分表或从零撰写英文/日文文书，可以使用本仓库配套的智能签证与全球流动助手 **[VisaDuo](https://visaduo.com)** 进行多国打分评估、个性化材料清单生成、AI 申请文书辅助与进度追踪。
+3. **100% DIY 友好**：绝大部分技术移民、人才引进、留学工签完全可以独立 DIY，省下动辄 3万~10万 RMB 的传统中介服务费。
 
 ---
 
@@ -77,9 +75,6 @@ flowchart TD
     Q1 -->|"有硕博学历/论文/专利/行业背景，想人在国内直接拿大国绿卡"| USGreenCard["🇺🇸 美国：EB-2 NIW (国家利益豁免) / EB-1A"]
 ```
 
-> 🔗 **拿不准自己能凑多少分？**  
-> 访问 **[VisaDuo 智能评估引擎 (visaduo.com)](https://visaduo.com)**，输入你的年龄、学历、语言和预算，30 秒自动比对全球 50+ 条主流签证路径，生成专属 **《DIY 可行性报告 + 申请材料清单》**。
-
 ---
 
 ## 🤝 贡献与免责声明 (Disclaimer)
@@ -87,3 +82,8 @@ flowchart TD
 1. **非法律建议**：本仓库所有内容均整理自各国移民局公开政策与社区真实 DIY 案例，仅供信息参考，不构成任何正式移民法律意见。
 2. **欢迎 PR**：移民政策瞬息万变，如果你发现某项打分标准、薪资线或排期有更新，欢迎提交 Issue 或 Pull Request！
 3. **Star 支持**：如果本仓库帮你省下了几万块中介费，请点亮右上角的 ⭐ **Star**，让更多 DIY 申请者看到！
+
+---
+
+### 🏷️ 检索关键词索引 (Keywords & Topics for Search)
+`润学` `润学指南` `技术移民` `移民DIY` `海外工作` `永居` `绿卡` `PR` `澳洲技术移民` `189签证` `190州担保` `491签证` `482雇主担保` `澳洲三宝` `ACS职业评估` `VETASSESS` `EA职业评估` `日本高度人才` `日本永住` `技人国` `J-Find` `美国绿卡` `EB-2 NIW` `国家利益豁免` `EB-1A` `杰出人才` `香港高才通` `香港优才` `IANG签证` `香港续签` `德国蓝卡` `EU Blue Card` `德国机会卡` `Chancenkarte` `荷兰HSM` `Search Year` `数字游民签证` `Digital Nomad Visa` `Global Mobility` `Immigration Guide` `Awesome Run`
