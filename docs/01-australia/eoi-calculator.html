@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🇦🇺 澳洲技术移民 EOI 交互式精准算分器 (2026 官方标准) | Get_PR</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-hover: #26354d;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #3b82f6;
+      --accent: #10b981;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px 80px;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      font-size: 1.75rem;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .badge {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pts-pill {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .hint {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+    }
+    .hint.warn {
+      border-left-color: var(--warn);
+      color: #fcd34d;
+    }
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    label.option-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    label.option-item:hover {
+      background: var(--card-hover);
+      border-color: #475569;
+    }
+    label.option-item input {
+      margin-right: 10px;
+      accent-color: var(--primary);
+      transform: scale(1.15);
+    }
+    .option-left {
+      display: flex;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+    .option-pts {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #93c5fd;
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+    /* Sticky Dashboard */
+    .dashboard {
+      position: sticky;
+      top: 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .dashboard h2 {
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .score-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .score-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .score-box .subclass {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .score-box .num {
+      font-size: 1.65rem;
+      font-weight: 800;
+    }
+    .score-box .sub-bonus {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .pass { color: var(--accent); }
+    .fail { color: var(--danger); }
+    .bench-list {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bench-item {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+    }
+    .bench-top {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .status-tag {
+      font-size: 0.75rem;
+      padding: 1px 8px;
+      border-radius: 4px;
+    }
+    .tag-green { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .tag-yellow { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .tag-red { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .deeming-calc {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px dashed #475569;
+    }
+    .deeming-calc label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .deeming-calc select, .deeming-calc input {
+      width: 100%;
+      padding: 6px 8px;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .footer-links {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      text-align: center;
+    }
+    .footer-links a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🇦🇺 澳洲技术移民 EOI 交互式精准算分器 (2026 版)</h1>
+      <p>严格对齐《Migration Regulations 1994 - Schedule 6D》及 2025.8.7 PTE 改革新政 | 支持职评扣年限自动折算</p>
+      <div class="badge-row">
+        <span class="badge">189 独立技术移民</span>
+        <span class="badge">190 州政府担保 (+5分)</span>
+        <span class="badge">491 偏远地区担保 (+15分)</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left: Form Sections -->
+      <div class="form-area">
+        <!-- 1. Age -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">1. 年龄 (Age - 以收到正式获邀信当天周岁为准)</div>
+            <span class="pts-pill" id="pill-age">30 分</span>
+          </div>
+          <div class="options-list">
+            <label class="option-item"><span class="option-left"><input type="radio" name="age" value="25"> 18 – 24 周岁</span><span class="option-pts">+25 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="age" value="30" checked> 25 – 32 周岁 (黄金满分档)</span><span class="option-pts">+30 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="age" value="25"> 33 – 39 周岁</span><span class="option-pts">+25 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="age" value="15"> 40 – 44 周岁</span><span class="option-pts">+15 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="age" value="-1"> 45 周岁及以上 (无法递交技术移民)</span><span class="option-pts" style="color:#f87171">不可申请</span></label>
+          </div>
+        </div>
+
+        <!-- 2. English -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">2. 英语能力 (English Language)</div>
+            <span class="pts-pill" id="pill-eng">20 分</span>
+          </div>
+          <div class="hint warn">
+            ⚠️ <strong>2025年8月7日 PTE 重大改革</strong>：PTE 不再是“四个65/79”，新政要求：<strong>Proficient (+10分)</strong> 需 听58/读59/写69/说76；<strong>Superior (+20分)</strong> 需 听69/读70/写85/说88！（2025.8.6前旧考生成绩3年内仍按四个65/79有效）
+          </div>
+          <div class="options-list">
+            <label class="option-item"><span class="option-left"><input type="radio" name="eng" value="20" checked> <strong>Superior (八炸)</strong>：雅思 4个8.0 | 新PTE 69/70/85/88</span><span class="option-pts">+20 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="eng" value="10"> <strong>Proficient (七炸)</strong>：雅思 4个7.0 | 新PTE 58/59/69/76</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="eng" value="0"> <strong>Competent (及格门槛)</strong>：雅思 4个6.0 | 新PTE 47/48/51/54</span><span class="option-pts">+0 分</span></label>
+          </div>
+        </div>
+
+        <!-- 3. Work Experience with Deeming Date Simulator -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">3. 过去10年内工作经验 (境内+境外封顶 20 分)</div>
+            <span class="pts-pill" id="pill-work">5 分</span>
+          </div>
+          <div class="hint">
+            💡 <strong>职评倒扣年限辅助计算器</strong>：ACS (IT) 通常倒扣 2–6 年，VETASSESS 倒扣 1–3 年，EA (工程) 与护理/教师不倒扣。只有扣除后的年限才能加分！
+          </div>
+          <div class="deeming-calc">
+            <div>
+              <label>你的职业评估机构折算规则：</label>
+              <select id="assess-body" onchange="applyDeemingHelper()">
+                <option value="0">不倒扣 (EA工程 / 护士 / 教师 / 社工)</option>
+                <option value="2" selected>ACS 计算机科班本硕 (倒扣 2 年)</option>
+                <option value="4">ACS 非科班相关专业 (倒扣 4 年)</option>
+                <option value="1">VETASSESS 相关专业 (倒扣 1 年)</option>
+                <option value="3">VETASSESS 非相关专业 (倒扣 3 年)</option>
+              </select>
+            </div>
+            <div>
+              <label>你毕业后实际全职工作总年数：</label>
+              <input type="number" id="actual-years" value="5" min="0" max="15" onchange="applyDeemingHelper()" />
+            </div>
+          </div>
+
+          <p style="font-size:0.86rem; font-weight:600; margin: 8px 0 6px; color:#cbd5e1;">A. 澳洲境外工作经验 (扣除职评折损后的有效年限)：</p>
+          <div class="options-list" style="margin-bottom: 14px;">
+            <label class="option-item"><span class="option-left"><input type="radio" name="overseas_work" value="0"> 不足 3 年</span><span class="option-pts">+0 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="overseas_work" value="5" checked> 3 – 4 年 (满36个月)</span><span class="option-pts">+5 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="overseas_work" value="10"> 5 – 7 年 (满60个月)</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="overseas_work" value="15"> 8 – 10 年 (满96个月)</span><span class="option-pts">+15 分</span></label>
+          </div>
+
+          <p style="font-size:0.86rem; font-weight:600; margin: 8px 0 6px; color:#cbd5e1;">B. 澳洲境内工作经验 (持有合法工签的全职相关工作)：</p>
+          <div class="options-list">
+            <label class="option-item"><span class="option-left"><input type="radio" name="au_work" value="0" checked> 不足 1 年 (或纯海外申请人)</span><span class="option-pts">+0 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="au_work" value="5"> 1 – 2 年</span><span class="option-pts">+5 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="au_work" value="10"> 3 – 4 年</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="au_work" value="15"> 5 – 7 年</span><span class="option-pts">+15 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="au_work" value="20"> 8 – 10 年</span><span class="option-pts">+20 分</span></label>
+          </div>
+        </div>
+
+        <!-- 4. Education -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">4. 最高学历 (Qualifications - 仅取最高一项)</div>
+            <span class="pts-pill" id="pill-edu">15 分</span>
+          </div>
+          <div class="options-list">
+            <label class="option-item"><span class="option-left"><input type="radio" name="edu" value="20"> 博士学位 (Doctorate / PhD)</span><span class="option-pts">+20 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="edu" value="15" checked> 本科学士 (Bachelor) 或 硕士学位 (Master)</span><span class="option-pts">+15 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="edu" value="10"> 澳洲技工文凭 (Diploma / Trade Qualification) 或职评认可文凭</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="edu" value="0"> 其他未认证学历</span><span class="option-pts">+0 分</span></label>
+          </div>
+        </div>
+
+        <!-- 5. Partner Skills -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">5. 婚姻与配偶加分 (Partner Skills)</div>
+            <span class="pts-pill" id="pill-partner">10 分</span>
+          </div>
+          <div class="options-list">
+            <label class="option-item"><span class="option-left"><input type="radio" name="partner" value="10" checked> 单身 (Single) <strong>或</strong> 配偶已是澳洲 PR / 公民</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="partner" value="10"> 配偶未满45岁 + 雅思4个6 + 持有同清单职业评估</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="partner" value="5"> 配偶仅有 Competent 英语 (雅思4个6 / PTE达标)，无职业评估</span><span class="option-pts">+5 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="radio" name="partner" value="0"> 已婚，且配偶英语未达雅思 4个6</span><span class="option-pts">+0 分</span></label>
+          </div>
+        </div>
+
+        <!-- 6. Bonus Points -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">6. 澳洲学习、偏远地区与社区语言附加分 (可多选叠加)</div>
+            <span class="pts-pill" id="pill-bonus">5 分</span>
+          </div>
+          <div class="options-list">
+            <label class="option-item"><span class="option-left"><input type="checkbox" id="chk-naati" value="5" checked> 通过 <strong>NAATI CCL 社区语言考试</strong> (中英口译网考，海外必拿)</span><span class="option-pts">+5 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="checkbox" id="chk-asr" value="5"> 满足 <strong>澳洲学习要求 (ASR)</strong> (澳洲完成 ≥92周 CRICOS 注册学位)</span><span class="option-pts">+5 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="checkbox" id="chk-regional" value="5"> <strong>澳洲偏远地区学习</strong> (除悉尼/墨尔本/布里斯班外完成2年学位)</span><span class="option-pts">+5 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="checkbox" id="chk-stem" value="10"> <strong>专项 STEM 硕博</strong> (澳洲境内完成 STEM 研究型硕士 Research 或 PhD)</span><span class="option-pts">+10 分</span></label>
+            <label class="option-item"><span class="option-left"><input type="checkbox" id="chk-py" value="5"> <strong>澳洲职业年 (Professional Year)</strong> (仅限IT/会计/工程澳洲毕业生完成44周PY)</span><span class="option-pts">+5 分</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Sticky Live Score & Benchmark Comparison -->
+      <div class="dashboard">
+        <h2>📊 你的 EOI 实时得分看板</h2>
+        <div id="age-warning" style="display:none; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#fca5a5; padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.85rem;">
+          ❌ 年满 45 周岁无法递交 189/190/491 技术移民，请重点考虑 482 转 186 雇主担保豁免通道或日本/欧洲路径。
+        </div>
+        <div class="score-cards">
+          <div class="score-box">
+            <div class="subclass">189 独立技术</div>
+            <div class="num pass" id="score-189">85</div>
+            <div class="sub-bonus">裸分 (+0)</div>
+          </div>
+          <div class="score-box">
+            <div class="subclass">190 州担保</div>
+            <div class="num pass" id="score-190">90</div>
+            <div class="sub-bonus">含州担 (+5)</div>
+          </div>
+          <div class="score-box">
+            <div class="subclass">491 偏远州担</div>
+            <div class="num pass" id="score-491">100</div>
+            <div class="sub-bonus">含偏远 (+15)</div>
+          </div>
+        </div>
+
+        <p style="font-size:0.83rem; color:var(--muted); margin-bottom:8px;">
+          🔍 <strong>对比 2025–2026 联邦 189 真实获邀底线 (基于你的 189 裸分)：</strong>
+        </p>
+        <div class="bench-list" id="benchmarks">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="footer-links">
+          <a href="./README.md">← 返回《澳大利亚 DIY 实战手册》文档</a>
+          <span style="margin:0 6px; color:#475569">|</span>
+          <a href="https://github.com/Flowers2Algernon/Get_PR" target="_blank">GitHub @Get_PR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const benchData = [
+      { name: "注册护士 (RN - 2544xx)", cutoff: 75, note: "2025.11 & 2026.06 轮次稳定 75 分获邀" },
+      { name: "中学教师 (Secondary - 241411)", cutoff: 75, note: "教育类核心红利，稳定 75 分获邀" },
+      { name: "社工 (Social Worker - 272511)", cutoff: 75, note: "医疗社区刚需，75–80 分区间" },
+      { name: "传统工程 (土木/电气/机械)", cutoff: 85, note: "建议同步递交 WA/NSW 190 州担" },
+      { name: "幼儿教师 (ECT - 241111)", cutoff: 85, warnOnly: true, note: "⚠️ 1年GD严重拥堵，85分亦常被轮空" },
+      { name: "IT / 软件工程 (2613xx)", cutoff: 95, note: "离岸189极难，需走州担190/491或482雇主" }
+    ];
+
+    function applyDeemingHelper() {
+      const deduct = parseInt(document.getElementById('assess-body').value, 10) || 0;
+      const actual = parseInt(document.getElementById('actual-years').value, 10) || 0;
+      const validYears = Math.max(0, actual - deduct);
+      let targetVal = "0";
+      if (validYears >= 8) targetVal = "15";
+      else if (validYears >= 5) targetVal = "10";
+      else if (validYears >= 3) targetVal = "5";
+
+      const radios = document.querySelectorAll('input[name="overseas_work"]');
+      radios.forEach(r => { r.checked = (r.value === targetVal); });
+      recalc();
+    }
+
+    function getRadioVal(name) {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? parseInt(el.value, 10) : 0;
+    }
+
+    function recalc() {
+      const age = getRadioVal('age');
+      const eng = getRadioVal('eng');
+      const overseasWork = getRadioVal('overseas_work');
+      const auWork = getRadioVal('au_work');
+      const totalWork = Math.min(20, overseasWork + auWork);
+      const edu = getRadioVal('edu');
+      const partner = getRadioVal('partner');
+
+      let bonus = 0;
+      ['chk-naati', 'chk-asr', 'chk-regional', 'chk-stem', 'chk-py'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.checked) bonus += parseInt(el.value, 10);
+      });
+
+      document.getElementById('pill-age').textContent = age < 0 ? '不可申请' : `${age} 分`;
+      document.getElementById('pill-eng').textContent = `${eng} 分`;
+      document.getElementById('pill-work').textContent = `${totalWork} 分` + (overseasWork + auWork > 20 ? ' (已触发20分封顶)' : '');
+      document.getElementById('pill-edu').textContent = `${edu} 分`;
+      document.getElementById('pill-partner').textContent = `${partner} 分`;
+      document.getElementById('pill-bonus').textContent = `${bonus} 分`;
+
+      const ageWarn = document.getElementById('age-warning');
+      if (age < 0) {
+        ageWarn.style.display = 'block';
+      } else {
+        ageWarn.style.display = 'none';
+      }
+
+      const baseScore = age < 0 ? 0 : (age + eng + totalWork + edu + partner + bonus);
+      const s189 = baseScore;
+      const s190 = age < 0 ? 0 : baseScore + 5;
+      const s491 = age < 0 ? 0 : baseScore + 15;
+
+      const el189 = document.getElementById('score-189');
+      const el190 = document.getElementById('score-190');
+      const el491 = document.getElementById('score-491');
+
+      el189.textContent = s189;
+      el190.textContent = s190;
+      el491.textContent = s491;
+
+      el189.className = 'num ' + (s189 >= 65 ? 'pass' : 'fail');
+      el190.className = 'num ' + (s190 >= 65 ? 'pass' : 'fail');
+      el491.className = 'num ' + (s491 >= 65 ? 'pass' : 'fail');
+
+      // Render benchmarks
+      const container = document.getElementById('benchmarks');
+      container.innerHTML = benchData.map(b => {
+        let tagClass = 'tag-red';
+        let statusText = `差 ${b.cutoff - s189} 分 (建议冲491: ${s491}分)`;
+        if (b.warnOnly) {
+          if (s189 >= 90) { tagClass = 'tag-yellow'; statusText = '高分仍有积压风险'; }
+          else { tagClass = 'tag-red'; statusText = '85分+积压严重，不推荐'; }
+        } else if (s189 >= b.cutoff) {
+          tagClass = 'tag-green';
+          statusText = '达到 189 获邀线 ✅';
+        } else if (s190 >= b.cutoff) {
+          tagClass = 'tag-yellow';
+          statusText = `189略紧，190 (${s190}分) 可冲`;
+        }
+        return `
+          <div class="bench-item">
+            <div class="bench-top">
+              <span>${b.name}</span>
+              <span class="status-tag ${tagClass}">${statusText}</span>
+            </div>
+            <div style="color:var(--muted); font-size:0.78rem;">最低参考线：${b.cutoff}分 | ${b.note}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('change', recalc);
+    });
+    recalc();
+  </script>
+</body>
+</html>

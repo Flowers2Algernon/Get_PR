@@ -48,6 +48,7 @@
 
 ### 1. 各国/地区深度 DIY 指南（含官方算分表、规费明细与续签合规指南）
 * 🇦🇺 **[01-澳大利亚：189/190/491 技术移民、四大职评机构规则、各州偏好与 482 雇主担保全解](./docs/01-australia/README.md)**
+  * 🧮 **[附：交互式澳洲 EOI 在线算分器 (支持 2025.8 PTE 新政、ACS/VET 扣年限模拟与获邀线实时对比)](https://htmlpreview.github.io/?https://github.com/Flowers2Algernon/Get_PR/blob/main/docs/01-australia/eoi-calculator.html)**
 * 🇯🇵 **[02-日本：高度人才 1 年永住算分表、技人国海外直聘、J-Find 与社保税务合规指南](./docs/02-japan/README.md)**
 * 🇺🇸 **[03-美国：EB-2 NIW / EB-1A 独立 DIY 论证框架、L-1 内部转岗与 O-1 破局指南](./docs/03-usa/README.md)**
 * 🇭🇰 **[04-中国香港：高才通、新版优才 12 选 6 自测表、IANG 留学及 7 年续签转永居实操](./docs/04-hongkong/README.md)**
